@@ -57,6 +57,7 @@ import org.densyakun.bukkit.dsp.dsprouting.DSPRouting;
 import org.densyakun.bukkit.dsp.dsprouting.Point;
 import org.densyakun.densyakunpoint.DensyakunPoint;
 public class Main extends JavaPlugin implements Runnable, Listener, ActionListener {
+	//プラグイン情報をstringに格納
 	String pro = "Author: Densyakun\n" +
 			"DensyakunServerPluginPlayer[DSPP] Densyakun\n" +
 			"DensyakunServerPluginCorporation[DSPCo] Densyakun\n" +
@@ -88,7 +89,6 @@ public class Main extends JavaPlugin implements Runnable, Listener, ActionListen
 	AutoReload reloaderc;
 	Thread reloader;
 	public static final String CWN = "kyozyuku";
-	public static final String Creativewn = "CreativeWorld";
 	public static final File dir = new File("./plugins/DSP/");
 	public TrayIcon tray;
 	public DSPWorlds dspwo;
@@ -103,19 +103,20 @@ public class Main extends JavaPlugin implements Runnable, Listener, ActionListen
 	public DSOI dsoi;
 	public DSPDev dspdev;
 	public DSL dsl;
+
 	@Override
 	public void run() {
 	}
 	public void onEnable(){
 		new Thread(this).start();
-		System.out.println("[DSP] - 初期化中...");
+		System.out.println("[DSP] - Resetting...");
 		try{
 			PopupMenu menu=new PopupMenu();
 			MenuItem item0=new MenuItem("プレイヤーリスト");
 			menu.add(item0);
 			item0.addActionListener(this);
 			SystemTray.getSystemTray().add(tray=new TrayIcon(ImageIO.read(new File("./server-icon.png")),"DSP",menu));
-			tray.displayMessage("DSP","初期化中...",MessageType.INFO);
+			tray.displayMessage("DSP","Resetting...",MessageType.INFO);
 		}catch(IOException|AWTException e){
 			e.printStackTrace();
 		}
@@ -159,8 +160,8 @@ public class Main extends JavaPlugin implements Runnable, Listener, ActionListen
 		//[DSPD]
 		dspdev = new DSPDev(this);
 		getServer().getPluginManager().registerEvents(this, this);
-		System.out.println("[DSP] - 初期化完了");
-		tray.displayMessage("DSP", "初期化完了", MessageType.INFO);
+		System.out.println("[DSP] - Reset successfly.");
+		tray.displayMessage("DSP", "Reset success.", MessageType.INFO);
 	}
 	public boolean onCommand(final CommandSender sender,final Command cmd,final String label,final String[]args){
 		try{
@@ -244,7 +245,7 @@ public class Main extends JavaPlugin implements Runnable, Listener, ActionListen
 					}
 				}else if(label.equalsIgnoreCase("dsp_c_clear")){
 					Corporation.clear();
-					System.out.println("[DSP][重要][DSPCo] - 会社データを初期化しました");
+					System.out.println("[DSPCo] - 会社データを初期化しました");
 					sender.sendMessage("[DSPCo] - 会社データを初期化しました");
 				}else if(label.equalsIgnoreCase("dsp_c_list")){
 					List<Corporation>a=Corporation.getCorps();
@@ -326,12 +327,12 @@ public class Main extends JavaPlugin implements Runnable, Listener, ActionListen
 					BufferedWriter bw=new BufferedWriter(new FileWriter(mailfile));
 					bw.write("sender:"+player.getName()+"\ntitle:"+args[1]+"\n"+args[2]);
 					bw.close();
-					player.sendMessage("[DSPM] - メールを送信しました 宛先:"+args[0]);
+					player.sendMessage("[DSPM] - メールを送信しました 宛先:"+ args[0]);
 				}else if(label.equalsIgnoreCase("dsp_m_del")||label.equalsIgnoreCase("dsp_m_delete")){
 					File mailfile=new File(dir+"/mail/"+player.getName()+"/"+args[0]+".txt");
 					if(mailfile.exists()){
 						mailfile.delete();
-						player.sendMessage("[DSPM] - メールを削除しました メール番号:"+args[0]);
+						player.sendMessage("[DSPM] - メールを削除しました メール番号:"+ args[0]);
 					} else {
 						player.sendMessage("[DSPM] - メール番号"+args[0]+"のメールは存在しません");
 					}
@@ -399,86 +400,13 @@ public class Main extends JavaPlugin implements Runnable, Listener, ActionListen
 					} else {
 						sender.sendMessage("[DSPR] - No."+args[0]+"の報告は存在しません");
 					}
-				} else if(label.equalsIgnoreCase("dgs")&&player.hasPermission("dsp.admin")) {
-					player.setGameMode(GameMode.SURVIVAL);
-				} else if(label.equalsIgnoreCase("dgc")&&player.hasPermission("dsp.admin")) {
-					player.setGameMode(GameMode.CREATIVE);
-				} else if(label.equalsIgnoreCase("ca")){
-					sender.sendMessage("[DSP] - 現在このコマンドは使用できません");
-					/*if(args.length>=2)sender.sendMessage("[DSPCa] - 通訳を利用する際、内容文に空白を入れることは出来ません");
-					else{
-						String str=Calc.calc(args[0]);
-						String[] sp=str.split(":c:");
-						str="";
-						for(int a=1;a<sp.length-1;a+=2)sp[a]=Calc.calc(sp[a]);
-						for(int a=0;a<sp.length;a++)str+=sp[a];
-						Player[] players=getServer().getOnlinePlayers();
-						for(int a=0;a<players.length;a++)players[a].sendMessage(player.getName()+" "+str+" - ([DSPCa]による通訳");
-					}*/
-				}else if(label.equalsIgnoreCase("crea")||label.equalsIgnoreCase("creative")){
-					if(!InventoryContent.Player(player.getName())){
-						InventoryContent.Save(this,player);
-						player.getInventory().clear();
-						player.getInventory().setArmorContents(null);
-						player.teleport(new Location(getServer().getWorld(Creativewn),1388,4,290));
-						player.setGameMode(GameMode.CREATIVE);
-						sender.sendMessage("[DSPCr] - クリエモードになりました。\nバグがありましたら/ret [内容]で報告して下さい。");
-						Player[]players=getServer().getOnlinePlayers().toArray(new Player[0]);
-						for(int a=0;a<players.length;a++) {
-							players[a].sendMessage(ChatColor.GREEN+"[DSPCr] - "+player.getDisplayName()+"がクリエモードになりました。");
-						}
-					} else {
-						sender.sendMessage("[DSPCr] - 既にクリエモードになっています。\nバグの報告は/ret [内容]で出来ます。");
-					}
-				}else if(label.equalsIgnoreCase("sback")){
-					if(InventoryContent.Player(player.getName())){
-						try{
-							InventoryContent.Load(this,player);
-						}catch(ArrayIndexOutOfBoundsException e){
-						}
-						player.setGameMode(GameMode.SURVIVAL);
-						player.teleport(dspwo.world_kyozyuku.getSpawnLocation());
-						sender.sendMessage("[DSPCr] - クリエモードから戻りました。");
-						Player[]players=getServer().getOnlinePlayers().toArray(new Player[0]);
-						for(int a=0;a<players.length;a++) {
-							players[a].sendMessage(ChatColor.GREEN+"[DSPCr] - "+player.getDisplayName()+"がクリエモードから戻りました。");
-						}
-					} else {
-						sender.sendMessage("[DSPCr] - クリエモードになっていません。\nバグは/ret [内容]で報告出来ます。");
-					}
 				} else if(label.equalsIgnoreCase("dsp_tp")&&player.hasPermission("dsp.admin")) {
 					Point point = dspro.SearchPoint(args[0]);
 					if (point != null) {
 						player.teleport(point.location);
 						point = null;
 					}
-				} else if(label.equalsIgnoreCase("dp")){
-					DensyakunPoint a=null;
-					if(args.length==0){
-						try{
-							a=new DensyakunPoint(((Player)sender).getName());
-							sender.sendMessage(new StringBuffer().append(ChatColor.RED).append("[DSP] ").append(ChatColor.GOLD).append(((Player)sender).getDisplayName()).append(ChatColor.GOLD).append("の統計:\nDP: ").append(ChatColor.WHITE).append(a.getPoint()).append(ChatColor.GOLD).append("\nDPランク: ").append(ChatColor.WHITE).append(a.getRank()).append("位\n").toString());
-						}catch(IOException x){
-							x.printStackTrace();
-						}
-					}else{
-						try{
-							a=new DensyakunPoint(args[0]);
-							String b=a.getName();
-							Player c=getServer().getPlayer(b);
-							if(c!=null){
-								b=c.getDisplayName();
-								c=null;
-							}
-							sender.sendMessage(new StringBuffer().append(ChatColor.RED).append("[DSP] ").append(ChatColor.GOLD).append(b).append(ChatColor.GOLD).append("の統計:\nDP: ").append(ChatColor.WHITE).append(a.getPoint()).append(ChatColor.GOLD).append("\nDPランク: ").append(ChatColor.WHITE).append(a.getRank()).append("位\n").toString());
-							b=null;
-						}
-						catch(IOException x){
-							x.printStackTrace();
-						}
-					}
-					a=null;
-				} else if (label.equalsIgnoreCase("dsp")) {
+				}　else if (label.equalsIgnoreCase("dsp")) {
 					if (args.length == 0) {
 						sender.sendMessage(new StringBuffer(ChatColor.GOLD.toString()).append("[DSP]").append(ChatColor.RED.toString()).append("パラメーターがありません").toString());
 					} else if (args[0].equalsIgnoreCase("menu")) {
