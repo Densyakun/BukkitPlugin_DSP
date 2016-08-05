@@ -1,6 +1,6 @@
 ﻿name: DSP
 main: org.densyakun.bukkit.dsp.Main
-version: 0.20.0
+version: 0.20.1
 author: Densyakun.
 website: http://densyakuncreate.wiki.fc2.com/
 softdepend: [Multiverse-Core]
@@ -90,18 +90,6 @@ commands:
    dgc:
       permission: dsp.admin
       permission-message: そのコマンドを実行する権限がありません
-   ca:
-      description: 通訳します
-      usage: /ca [本文]
-   crea:
-      description: クリエワールドに行きます
-      usage: /crea
-   creative:
-      description: クリエワールドに行きます
-      usage: /creative
-   sback:
-      description: クリエワールドから帰ります
-      usage: /sback
    dsp_tp:
       permission: dsp.admin
       permission-message: そのコマンドを実行する権限がありません
