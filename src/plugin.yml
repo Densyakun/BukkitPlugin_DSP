@@ -1,0 +1,144 @@
+﻿name: DSP
+main: org.densyakun.bukkit.dsp.Main
+version: 0.20.0
+author: Densyakun.
+website: http://densyakuncreate.wiki.fc2.com/
+softdepend: [Multiverse-Core]
+commands:
+   dsp:
+   dsp menu:
+      description: メニューを開きます
+      usage: /dsp menu
+   dsp ro add:
+      description: 指定した地名で現在地を位置情報として登録申し込みを行います
+      usage: /dsp ro add [地名]
+   dsp ro del:
+      description: 指定した位置情報の削除申し込みを行います
+      usage: /dsp ro del [地名]
+   dsp_pro:
+      description: 制作者を確認します Ensure that producers.
+      usage: /dsp_pro
+   dsp_c_add:
+      description: 会社を登録します
+      usage: /dsp_c_add [会社名]
+   dsp_c_del:
+      description: 会社を削除します
+      usage: /dsp_c_del [会社名]
+   dsp_c_delete:
+      description: 会社を削除します
+      usage: /dsp_c_delete [会社名]
+   dsp_c_info:
+      description: 会社の情報を表示します
+      usage: /dsp_c_info [会社名]
+   dsp_c_setinfo:
+      description: 会社の説明を設定します
+      usage: /dsp_c_setinfo
+   dsp_c_clear:
+      description: 会社の情報を初期化します
+      usage: /dsp_c_clear
+   dsp_reload:
+      description: 再読み込みします
+      usage: /dsp_reload
+   dsp_w_now:
+      description: 現在の気温を表示します
+      usage: /dsp_w_now
+   dsp_n_add:
+      description: ニュースの追加依頼をします(管理人が確認するまで追加されません)
+      usage: /dsp_n_add [文字]
+   dsp_n_del:
+      description: ニュースの削除依頼をします(管理人が確認するまで削除されません)
+      usage: /dsp_n_del [ニュース番号]
+   dsp_n_delete:
+      description: ニュースの削除依頼をします(管理人が確認するまで削除されません)
+      usage: /dsp_n_delete [ニュース番号]
+   dsp_n_reload:
+      description: ニュースを再読み込みします
+      usage: /dsp_n_reload
+      permission: dsp.admin
+      permission-message: そのコマンドを実行する権限がありません
+   dsp_m_send:
+      description: メールを送信します
+      usage: /dsp_m_send [宛先] [題名] [本文]
+   dsp_m_del:
+      description: メールを削除します
+      usage: /dsp_m_del [メール番号]
+   dsp_m_delete:
+      description: メールを削除します
+      usage: /dsp_m_delete [メール番号]
+   dsp_m_open:
+      description: メールを開きます
+      usge: /dsp_m_open [メール番号]
+   ret:
+      description: 管理者に報告します
+      usage: /ret [文字]
+   dsp_ret:
+      description: 管理者に報告します
+      usage: /dsp_ret [文字]
+   ret_open:
+      description: 報告を開きます
+      usage: /ret_open [報告番号]
+      permission: dsp.admin
+      permission-message: そのコマンドを実行する権限がありません
+   dsp_ret_open:
+      description: 報告を開きます
+      usage: /dsp_ret_open [報告番号]
+      permission: dsp.admin
+      permission-message: そのコマンドを実行する権限がありません
+   dgs:
+      permission: dsp.admin
+      permission-message: そのコマンドを実行する権限がありません
+   dgc:
+      permission: dsp.admin
+      permission-message: そのコマンドを実行する権限がありません
+   ca:
+      description: 通訳します
+      usage: /ca [本文]
+   crea:
+      description: クリエワールドに行きます
+      usage: /crea
+   creative:
+      description: クリエワールドに行きます
+      usage: /creative
+   sback:
+      description: クリエワールドから帰ります
+      usage: /sback
+   dsp_tp:
+      permission: dsp.admin
+      permission-message: そのコマンドを実行する権限がありません
+   dp:
+      description: DPを確認します
+      usage: /dp
+   dsasp:
+   dsasp info:
+      description: 土地の情報を確認します
+      usage: /dsasp info or /dsasp info [ID]
+   dsasp setname:
+      description: 土地の名前を変更します
+      usage: /dsasp setname [ID] [Name]
+   dsasp blocklock:
+      description: 土地の他人ブロック設置・破壊設定を変更します
+      usage: /dsasp blocklock [ID] [true or false]
+   dsasp movelock:
+      description: 土地の侵入設定を変更します
+      usage: /dsasp movelock [ID] [true or false]
+   dsasp sale:
+      description: 土地を売却します
+      usage: /dsasp sale [ID] [DP]
+   dsasp buy:
+      description: 土地を購入します
+      usage: /dsasp buy [ID]
+   dsasp value:
+      description: 土地の価値を確認します
+      usage: /dsasp value [ID]
+   dsasp list:
+      description: 土地のリストを表示します
+      usage: /dsasp list [ID] or /dsasp list [ID] [Page]
+permissions:
+   dsp.user:
+      default: true
+   dsp.admin:
+      default: false
+   dsp.fukuadmin:
+      default: false
+   dsp.owner:
+      default: false
