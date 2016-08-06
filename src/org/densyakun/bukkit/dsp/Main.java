@@ -586,55 +586,6 @@ public class Main extends JavaPlugin implements Runnable, Listener, ActionListen
 	}
 	@EventHandler
 	public void ItemDespawn(ItemDespawnEvent e) {
-		/*switch (e.getEntity().getItemStack().getType()) {
-		case BONE:
-			for (int a = 0; a < e.getEntity().getItemStack().getAmount(); a++) {
-				e.getEntity().getWorld().spawnEntity(e.getEntity().getLocation(), EntityType.SKELETON);
-				e.getEntity().getItemStack().setAmount(e.getEntity().getItemStack().getAmount() - 1);
-			}
-			break;
-		case EGG:
-		case FEATHER:
-			break;
-		case SEEDS:
-			for (int a = 0; a < e.getEntity().getItemStack().getAmount(); a++) {
-				if ((e.getEntity().getLocation().getBlock() != null) && (e.getEntity().getLocation().getBlock().getType() == Material.AIR)) {
-					e.getEntity().getLocation().getBlock().setType(Material.DEAD_BUSH);
-					e.getEntity().getLocation().getBlock().setData((byte) 1);
-					e.getEntity().getItemStack().setAmount(e.getEntity().getItemStack().getAmount() - 1);
-				} else {
-					e.setCancelled(true);
-				}
-			}
-			break;
-		case STRING:
-			for (int a = 0; a < e.getEntity().getItemStack().getAmount(); a++) {
-				e.getEntity().getWorld().spawnEntity(e.getEntity().getLocation(), EntityType.SPIDER);
-				e.getEntity().getItemStack().setAmount(e.getEntity().getItemStack().getAmount() - 1);
-			}
-			break;
-		case SULPHUR:
-			for (int a = 0; a < e.getEntity().getItemStack().getAmount(); a++) {
-				e.getEntity().getWorld().spawnEntity(e.getEntity().getLocation(), EntityType.CREEPER);
-				e.getEntity().getItemStack().setAmount(e.getEntity().getItemStack().getAmount() - 1);
-			}
-			break;
-		default:
-			if (e.getEntity().getItemStack().getType().isBlock()) {
-				for (int a = 0; a < e.getEntity().getItemStack().getAmount(); a++) {
-					if ((e.getEntity().getLocation().getBlock() != null) && (e.getEntity().getLocation().getBlock().getType() == Material.AIR)) {
-						e.getEntity().getLocation().getBlock().setType(e.getEntity().getItemStack().getType());
-						e.getEntity().getLocation().getBlock().setData(e.getEntity().getItemStack().getData().getData());
-						e.getEntity().getItemStack().setAmount(e.getEntity().getItemStack().getAmount() - 1);
-					} else {
-						e.setCancelled(true);
-					}
-				}
-			} else {
-				e.setCancelled(true);
-			}
-			break;
-		}*/
 		if (e.getEntity().getItemStack().getType() != Material.EGG) {
 			e.setCancelled(true);
 		}
@@ -757,42 +708,6 @@ public class Main extends JavaPlugin implements Runnable, Listener, ActionListen
 			a = null;
 		}
 	}
-	//2周年記念
-	/*@EventHandler
-	public void EntityDeath(EntityDeathEvent e) {
-		switch (e.getEntityType()) {
-		case BLAZE:
-		case CAVE_SPIDER:
-		case CREEPER:
-		case ENDERMAN:
-		case ENDER_DRAGON:
-		case GHAST:
-		case GIANT:
-		case MAGMA_CUBE:
-		case PIG_ZOMBIE:
-		case SILVERFISH:
-		case SKELETON:
-		case SLIME:
-		case SNOWMAN:
-		case SPIDER:
-		case WITCH:
-		case WITHER:
-		case WITHER_SKULL:
-		case ZOMBIE:
-			if (e.getEntity().getKiller() != null) {
-				e.getEntity().getWorld().dropItem(e.getEntity().getLocation(), new ItemStack(Material.COAL_BLOCK));
-				e.getEntity().getWorld().dropItem(e.getEntity().getLocation(), new ItemStack(Material.IRON_BLOCK));
-				e.getEntity().getWorld().dropItem(e.getEntity().getLocation(), new ItemStack(Material.GOLD_BLOCK));
-				e.getEntity().getWorld().dropItem(e.getEntity().getLocation(), new ItemStack(Material.LAPIS_BLOCK));
-				e.getEntity().getWorld().dropItem(e.getEntity().getLocation(), new ItemStack(Material.REDSTONE_BLOCK));
-				e.getEntity().getWorld().dropItem(e.getEntity().getLocation(), new ItemStack(Material.DIAMOND_BLOCK));
-				e.getEntity().getWorld().dropItem(e.getEntity().getLocation(), new ItemStack(Material.EMERALD_BLOCK));
-			}
-			break;
-		default:
-			break;
-		}
-	}*/
 	@EventHandler
 	public void BlockBurn(BlockBurnEvent e) {
 		e.setCancelled(true);
