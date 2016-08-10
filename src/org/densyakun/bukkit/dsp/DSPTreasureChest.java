@@ -40,11 +40,22 @@ public class DSPTreasureChest implements Runnable{
 	}
 	public ItemStack getRandomItems() {
 		switch (new Random().nextInt(42)) {
+		//リンゴ
 		case 0: return new ItemStack(Material.APPLE);
+
+		//腕
 		case 1: return new ItemStack(Material.ARROW);
+
+		//骨
 		case 2: return new ItemStack(Material.BONE);
+
+		//矢
 		case 3: return new ItemStack(Material.BOW);
+
+		//ニンジン
 		case 4: return new ItemStack(Material.CARROT_ITEM);
+
+		//チェーン装備
 		case 5: return new ItemStack(Material.CHAINMAIL_BOOTS);
 		case 6: return new ItemStack(Material.CHAINMAIL_CHESTPLATE);
 		case 7: return new ItemStack(Material.CHAINMAIL_HELMET);
